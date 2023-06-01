@@ -63,16 +63,19 @@ int newtonStepTest(){
 int linearEquationTest(){
     vector<vector<double>> A;
     vector<double> b;
+    vector<double> x(10000);
+    x = {0};
+    start = clock();
 //    generateProblem(A, b, "test2");
     loadProblem(A, b, "test2");
-    cout << A[0][0] << endl;
-    cout << A[1][1] << endl;
-    cout << A[2][2] << endl;
-    cout << A[3][3] << endl;
-}
+    finish = clock();
+    cout << " time : " << (double) (finish - start) / CLOCKS_PER_SEC <<"\n";
 
+
+}
 
 int main() {
     linearEquationTest();
     return 0;
 }
+
