@@ -2,6 +2,7 @@
 #include "gd.h"
 #include "steepestdescent.h"
 #include "newtonstep.h"
+#include "matmul.h"
 #define EPSILON 0.00001
 
 clock_t start, finish;
@@ -59,9 +60,19 @@ int newtonStepTest(){
     cout << "z = " << f(sol) << " time : " << (double) (finish - start) / CLOCKS_PER_SEC <<"\n";
 }
 
+int linearEquationTest(){
+    vector<vector<double>> A;
+    vector<double> b;
+//    generateProblem(A, b, "test2");
+    loadProblem(A, b, "test2");
+    cout << A[0][0] << endl;
+    cout << A[1][1] << endl;
+    cout << A[2][2] << endl;
+    cout << A[3][3] << endl;
+}
+
+
 int main() {
-    gradientDescentTest();
-    steepestDescentTest();
-    newtonStepTest();
+    linearEquationTest();
     return 0;
 }

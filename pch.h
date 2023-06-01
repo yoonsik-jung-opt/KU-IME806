@@ -8,7 +8,9 @@
 #include "string"
 #include "math.h"
 #include <time.h>
-
+#include "random"
+#include <fstream>
+#include <sstream>
 using namespace std;
 
 double f(vector<double> x){
