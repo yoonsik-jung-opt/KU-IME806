@@ -58,7 +58,7 @@ void generateProblem(vector<vector<double>> &AA, vector<double> &bb, string fnam
 
 }
 
-vector<vector<double>> loadA(string fname){
+void loadA(vector<vector<double>> &AA, string fname){
     vector<vector<double>> A;
     A.resize(10000);
     ifstream fileA(fname + "_A.csv");
@@ -75,19 +75,19 @@ vector<vector<double>> loadA(string fname){
 
             while(getline(iss, buffer, ',')){
                 buffer_d = stod(buffer);
-                temp[i] = buffer_d;
-                i++;
+                temp[i++] = buffer_d;
+                //i++
             }
-            A[j] = temp;
-            j++;
+            A[j++] = temp;
+            // j++;
         }
         fileA.close();
     }
 
-    return A;
+    AA=A;
 }
 
-vector<double> loadb(string fname){
+void loadb(vector<double> &bb, string fname){
     vector<double> b;
     b.resize(10000);
     ifstream fileb(fname+"_b.csv");
@@ -97,19 +97,74 @@ vector<double> loadb(string fname){
         int i = 0;
         while(getline(fileb, line)){
             buffer_d = stod(line);
-            b[i] = buffer_d;
-            i++;
+            b[i++] = buffer_d;
+//            i++;
         }
     }
 
-    return b;
+    bb = b;
 }
 
 void loadProblem(vector<vector<double>> &A, vector<double> &b, string fname){
-    A = loadA(fname);
-    b = loadb(fname);
+    loadA(A, fname);
+    loadb(b, fname);
 }
 
+namespace oper{
+
+    // inner product of two vector
+    double matmul(const vector<double> &A, const vector<double> &B){
+        int nrowA = 1, nrowB=B.size(), ncolA=A.size(), ncolB=1;
+        int resrow = nrowA, rescol = ncolB;
+        assert(ncolA == nrowB);
+        double res = 0;
+        for(int i = 0; i < ncolA; i++){
+            res += A[i] * B[i];
+        }
+        return res;
+    };
+
+    vector<vector<double>> matmul(const vector<vector<double>> &A, const vector<vector<double>> &B){
+        int nrowA = A.size(), nrowB=B.size(), ncolA=A[0].size(), ncolB=B[0].size();
+        int resrow = nrowA, rescol = ncolB;
+        assert(ncolA == nrowB);
+        vector<vector<double>> res;
+        res.resize(resrow);
+        for(int i = 0; i < resrow; i++){
+            res[i] = vector<double>(rescol);
+        }
+        for(int i = 0; i < resrow; i++){
+            for(int j = 0; j < rescol; j++){
+                for(int k = 0; k < nrowB; k++){
+                    res[i][j] += A[i][k] * B[k][j];
+                }
+            }
+        }
+
+        return res;
+    };
+
+    vector<double> matmul(const vector<vector<double>> &A, const vector<double> &B){
+        int nrowA = A.size(), nrowB=B.size(), ncolA=A[0].size(), ncolB=1;
+        int resrow = nrowA, rescol = ncolB;
+        assert(ncolA == nrowB);
+        vector<double> res;
+        res.resize(resrow);
+        for(int i = 0; i < resrow; i++){
+            res[i] = matmul(A[i], B);
+        }
+        return res;
+    };
+
+//    vector<vector<double>> matmul(const vector<double> &A, const vector<vector<double>> &B){
+//        int nrowA = A.size(), nrowB=B.size(), ncolA=1, ncolB=B[0].size();
+//        int resrow = nrowA, rescol = ncolB;
+//    };
+
+
+
+
+}
 
 
 

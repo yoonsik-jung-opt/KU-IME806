@@ -60,6 +60,24 @@ int newtonStepTest(){
     cout << "z = " << f(sol) << " time : " << (double) (finish - start) / CLOCKS_PER_SEC <<"\n";
 }
 
+int matmulTest(){
+    vector<double> A = {1,1,1,1};
+    vector<vector<double>> B = {{13, 9,7 ,15},{8,7,4,6},{6,4,0,3}};
+//    auto res = oper::matmul(A, B);
+
+//    for(auto r : res){
+//        for(auto v : r){
+//            cout << v << " ";
+//        }
+//        cout << "\n";
+//    }
+
+    auto v = oper::matmul(B, A);
+    for(auto vv : v){
+        cout << vv << " ";
+    }
+}
+
 int linearEquationTest(){
     vector<vector<double>> A;
     vector<double> b;
@@ -67,15 +85,18 @@ int linearEquationTest(){
     x = {0};
     start = clock();
 //    generateProblem(A, b, "test2");
-    loadProblem(A, b, "test2");
+    loadProblem(A, b, "test1");
     finish = clock();
     cout << " time : " << (double) (finish - start) / CLOCKS_PER_SEC <<"\n";
+
+    cout<< A[0][0] << endl;
 
 
 }
 
 int main() {
-    linearEquationTest();
+//    linearEquationTest();
+    matmulTest();
     return 0;
 }
 
