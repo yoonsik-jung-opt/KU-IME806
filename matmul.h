@@ -8,6 +8,8 @@
 
 #include "pch.h"
 
+
+
 void generateProblem(vector<vector<double>> &AA, vector<double> &bb, string fname){
     // save csv initialization
     ofstream myFileA(fname + "_A.csv");
@@ -59,6 +61,8 @@ void generateProblem(vector<vector<double>> &AA, vector<double> &bb, string fnam
 }
 
 void loadA(vector<vector<double>> &AA, string fname){
+    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
     vector<vector<double>> A;
     A.resize(10000);
     ifstream fileA(fname + "_A.csv");
@@ -88,6 +92,8 @@ void loadA(vector<vector<double>> &AA, string fname){
 }
 
 void loadb(vector<double> &bb, string fname){
+    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
     vector<double> b;
     b.resize(10000);
     ifstream fileb(fname+"_b.csv");
@@ -155,6 +161,19 @@ namespace oper{
         }
         return res;
     };
+
+
+    vector<vector<double>> matmulM(const vector<vector<double>> &A, const vector<vector<double>> &B, int nthread=10){
+
+//
+//        pthread_t threads[nthread];
+//        for(int i = 0; i < nthread; i++){
+//            double *point;
+//            pthread_create(&threads[i], NULL, operation, (void *)(point));
+//        }
+
+
+    }
 
 //    vector<vector<double>> matmul(const vector<double> &A, const vector<vector<double>> &B){
 //        int nrowA = A.size(), nrowB=B.size(), ncolA=1, ncolB=B[0].size();

@@ -3,7 +3,10 @@
 #include "steepestdescent.h"
 #include "newtonstep.h"
 #include "matmul.h"
+#include "LinAlg.h"
 #define EPSILON 0.00001
+
+
 
 clock_t start, finish;
 double duration;
@@ -61,42 +64,72 @@ int newtonStepTest(){
 }
 
 int matmulTest(){
-    vector<double> A = {1,1,1,1};
-    vector<vector<double>> B = {{13, 9,7 ,15},{8,7,4,6},{6,4,0,3}};
-//    auto res = oper::matmul(A, B);
-
-//    for(auto r : res){
-//        for(auto v : r){
-//            cout << v << " ";
-//        }
-//        cout << "\n";
+//    vector<double> A = {1,1,1,1};
+//    vector<vector<double>> B = {{13, 9,7 ,15},{8,7,4,6},{6,4,0,3}};
+////    auto res = oper::matmul(A, B);
+//
+////    for(auto r : res){
+////        for(auto v : r){
+////            cout << v << " ";
+////        }
+////        cout << "\n";
+////    }
+//
+//    auto v = oper::matmul(B, A);
+//    for(auto vv : v){
+//        cout << vv << " ";
 //    }
 
-    auto v = oper::matmul(B, A);
-    for(auto vv : v){
-        cout << vv << " ";
-    }
 }
 
 int linearEquationTest(){
     vector<vector<double>> A;
     vector<double> b;
-    vector<double> x(10000);
-    x = {0};
-    start = clock();
-//    generateProblem(A, b, "test2");
-    loadProblem(A, b, "test1");
+    vector<double> x(10000, 0);
+// multiprocessing
+//    start = clock();
+    generateProblem(A, b, "test1");
+    generateProblem(A, b, "test3");
+    generateProblem(A, b, "test4");
+    generateProblem(A, b, "test5");
+
+//    loadProblem(A, b, "test2");
+//    finish = clock();
+//    cout << " time : " << (double) (finish - start) / CLOCKS_PER_SEC <<"\n";
+//
+//    start = clock();
+//    LinearAlgebra::Matrix m(A);
+//
+//    vector<vector<double>> AA;
+//    for(int i = 0; i < 10; i++){
+//        AA.push_back(A[i]);
+//    }
+//
+//    LinearAlgebra::Matrix mm(AA);
+//    auto mmt = mm.T();
+//    auto res = oper::matmul(mmt, AA);
+//    auto grad = LinearAlgebra::vectorMinus( oper::matmul(res, x), oper::matmul(AA, b));
+//
+//
+//    cout << grad.size() << " " << endl;
+//    cout << grad[0] << endl;
+//    cout << grad[1] << endl;
+
+
+    //    oper::matmul(A, b);
+
+//    m.QRDecomposition();
     finish = clock();
     cout << " time : " << (double) (finish - start) / CLOCKS_PER_SEC <<"\n";
-
     cout<< A[0][0] << endl;
 
 
 }
 
 int main() {
-//    linearEquationTest();
-    matmulTest();
+    linearEquationTest();
+//    matmulTest();
+
     return 0;
 }
 

@@ -4,4 +4,4 @@ set(TARGET_NAME IME806)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(IME806 main.cpp pch.h gd.h steepestdescent.h newtonstep.h matmul.h)
+add_executable(IME806 main.cpp pch.h gd.h steepestdescent.h newtonstep.h matmul.h LinAlg.h)
